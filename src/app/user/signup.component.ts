@@ -4,25 +4,21 @@ import { MyHttpService } from '../shared/services/properties.service';
 import { User } from '../shared/model/user';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html'
+  selector: 'sign-up',
+  templateUrl: './sign-up.component.html'
 })
-export class UserComponent implements OnInit {
+export class SignUpComponent implements OnInit {
 
   constructor(private service: MyHttpService) { }
 
   user: User = <User>{};
+  verifiedPassword = '';
 
   public ngOnInit() { }
 
 
-
-
   onSubmit() {
-
     this.service.createUser(this.user).subscribe();
-
   }
-
 
 }

@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpModule }    from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { UserComponent } from './user.component';
+import { SignUpComponent } from './signup.component';
 import { MyHttpService } from '../shared/services/properties.service';
  
 
 @NgModule({
   declarations: [
-    UserComponent
+    SignUpComponent
   ],
+  exports: [SignUpComponent],
   imports: [
     BrowserModule,  HttpModule, HttpClientModule, FormsModule
   ],

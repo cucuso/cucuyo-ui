@@ -7,20 +7,24 @@ import { AppComponent } from './app.component';
 import { HttpModule }    from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-import { UserComponent } from './user/user.component'; 
+import { PropertyModule } from './property/property.module';
+import { CreatePropertyComponent } from './property/create/create-property.component'; 
+import { UserModule } from './user/user.module';
+import { SignUpComponent } from './user/signup.component'; 
+import { PropertySearchComponent } from './property/search/property-search.component';
 
 const appRoutes: Routes = [
-  { path: 'users', component: UserComponent },
+  { path: 'users', component: SignUpComponent },
+  {path:'list', component: CreatePropertyComponent}
 ];
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,  HttpModule, HttpClientModule, FormsModule,
+    BrowserModule,  HttpModule, HttpClientModule, FormsModule, PropertyModule, UserModule,
      RouterModule.forRoot(
       appRoutes,
     )
