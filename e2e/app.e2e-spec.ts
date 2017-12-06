@@ -1,10 +1,10 @@
-import { TPage } from './app.po';
+import {AppPage} from './app.po';
 
-describe('t App', () => {
-  let page: TPage;
+describe('cucuyo-ui App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new TPage();
+    page = new AppPage();
   });
 
   it('should display welcome message', () => {
