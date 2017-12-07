@@ -2,17 +2,9 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: '<router-outlet></router-outlet>',
   styles: []
 })
 export class AppComponent {
-
-  isLoading = false;
-
-  submit() {
-    this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1000);
-  }
 }
+
