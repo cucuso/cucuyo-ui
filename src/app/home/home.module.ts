@@ -5,6 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './page/home.component';
 import {MaterialModule} from '../material/material.module';
+import {SearchFormComponent} from './components/search-form/search-form.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import {MaterialModule} from '../material/material.module';
     HomeRoutingModule,
     MaterialModule
   ],
-  declarations: [HomeComponent]
+  declarations: [HomeComponent, SearchFormComponent]
 })
 export class HomeModule {
 }

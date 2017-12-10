@@ -5,6 +5,8 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
+  MatListModule,
+  MatPaginatorModule,
   MatProgressBarModule,
   MatToolbarModule
 } from '@angular/material';
@@ -17,7 +19,9 @@ import {
     MatInputModule,
     MatButtonModule,
     MatButtonToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatPaginatorModule,
+    MatListModule
   ]
 })
 export class MaterialModule {

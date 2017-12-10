@@ -1,0 +1,46 @@
+@import '/../../../../assets/style/modules/variables';
+
+$search-form-width: 80%;
+
+app-search-form {
+
+  mat-progress-bar {
+    background-color: $blue;
+    //width: $search-form-width !important;
+  }
+
+  .search-form {
+    //width: $search-form-width;
+
+    mat-card-title {
+      padding-bottom: 50px;
+
+      span {
+        position: absolute;
+        font-size: 24px !important;
+        color: $blue;
+        font-weight: 400;
+        padding-left: 200px;
+      }
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    button {
+      margin-top: 7px;
+      margin-left: 10px;
+      height: 35px;
+      background-color: $blue !important;
+    }
+
+    mat-button-toggle {
+      margin-top: 7px;
+      margin-left: 5px;
+      height: 35px;
+    }
+  }
+}
+
+
