@@ -1,0 +1,19 @@
+@import '/../../../../assets/style/modules/variables';
+
+app-search-list-item {
+  margin-bottom: 10px;
+
+  mat-card {
+    background: #fafafa !important;
+  }
+
+  .avatar {
+    height: 70px !important;
+    width: 70px !important;
+    border-radius: 0 !important;
+  }
+
+  .title {
+    font-size: 18px !important;
+  }
+}

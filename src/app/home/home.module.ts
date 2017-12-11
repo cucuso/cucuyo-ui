@@ -6,6 +6,9 @@ import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './page/home.component';
 import {MaterialModule} from '../material/material.module';
 import {SearchFormComponent} from './components/search-form/search-form.component';
+import {SearchListComponent} from './components/search-list/search-list.component';
+import {AppCommonsModule} from '../commons/app-commons.module';
+import {SearchListItemComponent} from './components/search-list-item/search-list-item.component';
 
 @NgModule({
   imports: [
@@ -13,9 +16,15 @@ import {SearchFormComponent} from './components/search-form/search-form.componen
     ReactiveFormsModule,
     FlexLayoutModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
+    AppCommonsModule
   ],
-  declarations: [HomeComponent, SearchFormComponent]
+  declarations: [
+    HomeComponent,
+    SearchFormComponent,
+    SearchListComponent,
+    SearchListItemComponent
+  ]
 })
 export class HomeModule {
 }

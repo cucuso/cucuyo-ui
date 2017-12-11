@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {AdProperties} from "../../../commons/model/ad-properties.model";
 
 @Component({
   selector: 'app-search-form',
@@ -11,7 +12,7 @@ export class SearchFormComponent {
 
   isLoading = false;
   isAdvancedSearchEnabled = false;
-  @Output() whenSearchEnds: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+  @Output() whenSearchEnds: EventEmitter<Array<AdProperties>> = new EventEmitter<Array<AdProperties>>();
   searchForm: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
@@ -26,7 +27,11 @@ export class SearchFormComponent {
     this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
-      this.whenSearchEnds.emit([]);
+      const ad = new AdProperties();
+      ad.title = 'Se vende casa en Brisas del Mar a 150 mtrs de la playa.';
+      ad.avatarUrl = 'http://localhost:4200/assets/images/home-avatar.jpg';
+      ad.price = 90000;
+      this.whenSearchEnds.emit([ad, ad, ad, ad, ad]);
     }, 1000);
   }
 }

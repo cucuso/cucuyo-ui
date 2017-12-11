@@ -1,4 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {AdProperties} from '../../commons/model/ad-properties.model';
 
 @Component({
   selector: 'app-home',
@@ -6,18 +7,15 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./home.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   isSearchFormSubmitted = false;
-  items = [];
+  items: Array<AdProperties> = [];
 
   constructor() {
   }
 
-  ngOnInit() {
-  }
-
-  renderSearchResults(searchResults: Array<any>) {
+  renderSearchResults(searchResults: Array<AdProperties>) {
     this.isSearchFormSubmitted = true;
     this.items = searchResults;
   }

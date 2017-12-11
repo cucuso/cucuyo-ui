@@ -1,4 +1,4 @@
 @mixin bg_image($url) {
-  background: url($url) center;
+  background: url($url) no-repeat center center fixed;
   background-size: cover;
 }

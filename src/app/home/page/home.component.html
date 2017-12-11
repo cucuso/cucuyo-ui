@@ -1,4 +1,4 @@
-<section class="home">
+<section>
   <mat-toolbar color="primary" class="mat-elevation-z5">
     <span>Welcome to Cucuyo Cuba Real Estate</span>
   </mat-toolbar>
@@ -7,13 +7,6 @@
     <app-search-form (whenSearchEnds)="renderSearchResults($event)"
                      [ngClass]="{'mrg-left-percent-20': isSearchFormSubmitted}"></app-search-form>
 
-    <mat-card class="search-items" *ngIf="isSearchFormSubmitted" fxFlex>
-      <mat-card-content>
-
-      </mat-card-content>
-      <mat-card-footer>
-        <mat-paginator [length]="100" [pageSize]="10"></mat-paginator>
-      </mat-card-footer>
-    </mat-card>
+    <app-search-list [items]="items" class="search-items" *ngIf="isSearchFormSubmitted" fxFlex></app-search-list>
   </div>
 </section>
