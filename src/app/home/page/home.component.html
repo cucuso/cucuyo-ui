@@ -4,9 +4,15 @@
   </mat-toolbar>
 
   <div class="search-container flex-container" fxLayout="column" fxLayoutAlign="start stretch">
-    <app-search-form (whenSearchEnds)="renderSearchResults($event)"
-                     [ngClass]="{'mrg-left-percent-20': isSearchFormSubmitted}"></app-search-form>
+    <app-search-form (onSubmit)="search($event)"
+                     [ngClass]="{'mrg-left-percent-20': isSearchFormSubmitted}"
+                     [loading]="isSearchFormLoading"></app-search-form>
 
-    <app-search-list [items]="items" class="search-items" *ngIf="isSearchFormSubmitted" fxFlex></app-search-list>
+    <app-search-list class="search-items"
+                     [currentPage]="currentPage"
+                     [pageSize]="pageSize"
+                     (nextPage)="nextPage($event)"
+                     (previousPage)="previousPage($event)"
+                     *ngIf="isSearchFormSubmitted" fxFlex></app-search-list>
   </div>
 </section>

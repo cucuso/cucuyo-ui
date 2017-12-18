@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {AdProperties} from "../../../commons/model/ad-properties.model";
+import {AdPropertiesSearch} from '../../../commons/model/ad-properties-search.model';
 
 @Component({
   selector: 'app-search-form',
@@ -10,9 +10,9 @@ import {AdProperties} from "../../../commons/model/ad-properties.model";
 })
 export class SearchFormComponent {
 
-  isLoading = false;
+  @Input('loading') loading = false;
   isAdvancedSearchEnabled = false;
-  @Output() whenSearchEnds: EventEmitter<Array<AdProperties>> = new EventEmitter<Array<AdProperties>>();
+  @Output() onSubmit: EventEmitter<AdPropertiesSearch> = new EventEmitter<AdPropertiesSearch>();
   searchForm: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
@@ -24,14 +24,14 @@ export class SearchFormComponent {
   }
 
   submit() {
-    this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-      const ad = new AdProperties();
-      ad.title = 'Se vende casa en Brisas del Mar a 150 mtrs de la playa.';
-      ad.avatarUrl = 'http://localhost:4200/assets/images/home-avatar.jpg';
-      ad.price = 90000;
-      this.whenSearchEnds.emit([ad, ad, ad, ad, ad]);
-    }, 1000);
+    const searchParams = new AdPropertiesSearch();
+    searchParams.text = this.searchForm.get('criteria').value;
+
+    if (this.isAdvancedSearchEnabled) {
+      searchParams.from = this.searchForm.get('from').value;
+      searchParams.to = this.searchForm.get('to').value;
+    }
+
+    this.onSubmit.emit(searchParams);
   }
 }

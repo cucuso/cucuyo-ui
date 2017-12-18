@@ -1,11 +1,13 @@
 <mat-card>
   <mat-card-content>
     <div class="flex-container" fxLayout="column" fxLayoutAlign="start stretch">
-      <mat-paginator [length]="100" [pageSize]="10"></mat-paginator>
-      <app-search-list-item *ngFor="let item of items" [item]="item"></app-search-list-item>
+      <mat-paginator [length]="currentPage.totalElements" [pageSize]="pageSize"
+                     (page)="onPageChange($event)"></mat-paginator>
+      <app-search-list-item *ngFor="let item of currentPage.content" [item]="item"></app-search-list-item>
     </div>
   </mat-card-content>
   <mat-card-footer>
-    <mat-paginator [length]="100" [pageSize]="10"></mat-paginator>
+    <mat-paginator [length]="currentPage.totalElements" [pageSize]="pageSize"
+                   (page)="onPageChange($event)"></mat-paginator>
   </mat-card-footer>
 </mat-card>

@@ -1,5 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {AdProperties} from '../../commons/model/ad-properties.model';
+import {DataPage} from '../../commons/model/data-page.model';
+import {AdPropertiesSearch} from '../../commons/model/ad-properties-search.model';
+import {AdPropertiesRepository} from '../../commons/model/ad-properties-repository.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +12,35 @@ import {AdProperties} from '../../commons/model/ad-properties.model';
 })
 export class HomeComponent {
 
+  pageSize = 100;
+  isSearchFormLoading = false;
   isSearchFormSubmitted = false;
-  items: Array<AdProperties> = [];
+  currentPage = new DataPage<AdProperties>();
+  searchParams: AdPropertiesSearch;
+  pageSates = [];
 
-  constructor() {
+  constructor(private propsRepository: AdPropertiesRepository) {
   }
 
-  renderSearchResults(searchResults: Array<AdProperties>) {
-    this.isSearchFormSubmitted = true;
-    this.items = searchResults;
+  search(searchParams: AdPropertiesSearch) {
+    searchParams.limit = this.pageSize;
+    this.isSearchFormLoading = true;
+    this.propsRepository.search(searchParams).subscribe((data: DataPage<AdProperties>) => {
+      this.searchParams = searchParams;
+      this.currentPage = data;
+      this.isSearchFormLoading = false;
+      this.isSearchFormSubmitted = this.currentPage.content.length > 0;
+      this.pageSates.push('');
+      this.pageSates.push(data.nextPage);
+    });
   }
+
+  nextPage(pageIndex: number) {
+    console.info('not implemented yet');
+  }
+
+  previousPage(pageIndex: number) {
+    console.info('not implemented yet');
+  }
+
 }
