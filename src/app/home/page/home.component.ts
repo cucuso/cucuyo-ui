@@ -4,6 +4,8 @@ import {DataPage} from '../../commons/model/data-page.model';
 import {AdPropertiesSearch} from '../../commons/model/ad-properties-search.model';
 import {AdPropertiesRepository} from '../../commons/model/ad-properties-repository.service';
 
+const FIRST_PAGE_STATE = undefined;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,7 +14,7 @@ import {AdPropertiesRepository} from '../../commons/model/ad-properties-reposito
 })
 export class HomeComponent {
 
-  pageSize = 100;
+  pageSize = 1;
   isSearchFormLoading = false;
   isSearchFormSubmitted = false;
   currentPage = new DataPage<AdProperties>();
@@ -30,17 +32,24 @@ export class HomeComponent {
       this.currentPage = data;
       this.isSearchFormLoading = false;
       this.isSearchFormSubmitted = this.currentPage.content.length > 0;
-      this.pageSates.push('');
+      this.pageSates.push(FIRST_PAGE_STATE);
       this.pageSates.push(data.nextPage);
     });
   }
 
   nextPage(pageIndex: number) {
-    console.info('not implemented yet');
+    this.renderPage(pageIndex - 1);
+  }
+
+  private renderPage(pageIndex: number) {
+    this.searchParams.offset = this.pageSates[pageIndex];
+    this.propsRepository.search(this.searchParams).subscribe((data: DataPage<AdProperties>) => {
+      this.pageSates.push(data.nextPage);
+      this.currentPage = data;
+    });
   }
 
   previousPage(pageIndex: number) {
-    console.info('not implemented yet');
+    this.renderPage(pageIndex);
   }
-
 }
