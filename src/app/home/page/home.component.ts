@@ -14,7 +14,7 @@ const FIRST_PAGE_STATE = undefined;
 })
 export class HomeComponent {
 
-  pageSize = 1;
+  pageSize = 50;
   isSearchFormLoading = false;
   isSearchFormSubmitted = false;
   currentPage = new DataPage<AdProperties>();
