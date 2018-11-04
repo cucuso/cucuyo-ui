@@ -1,6 +1,7 @@
-# T
+# UI for cucuyo app
+Real Estate website for Cuba 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.1.
+![Build](https://travis-ci.org/cucuso/cucuyo-ui.svg?branch=master)
 
 ## Development server
 
