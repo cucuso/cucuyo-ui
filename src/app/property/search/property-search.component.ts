@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { MyHttpService } from '../../shared/services/properties.service';
 import { SearchDto } from '../../shared/model/search-dto';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'property-search',
@@ -10,7 +10,7 @@ import { SearchDto } from '../../shared/model/search-dto';
 })
 export class PropertySearchComponent implements OnInit {
 
-  constructor(private service: MyHttpService) { }
+  constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer) { }
   title = 'app';
 
   properties = [];

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { MyHttpService } from './shared/services/properties.service';
-import { SearchDto } from './shared/model/search-dto';
+
 
 @Component({
   selector: 'app-root',
