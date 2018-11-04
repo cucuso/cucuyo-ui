@@ -11,7 +11,6 @@ import { PropertyModule } from './property/property.module';
 import { CreatePropertyComponent } from './property/create/create-property.component'; 
 import { UserModule } from './user/user.module';
 import { SignUpComponent } from './user/signup.component'; 
-import { PropertySearchComponent } from './property/search/property-search.component';
 
 const appRoutes: Routes = [
   { path: 'users', component: SignUpComponent },
