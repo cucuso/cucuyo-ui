@@ -12,8 +12,11 @@ addons:
   chrome: stable
 
 script:
-  - npm run build
+  - npm run build --prod
 
+before_deploy:
+  - cd dist
+  
 deploy:
   provider: s3
   access_key_id: "AKIAIROOOYQL2RYRPHHA"
