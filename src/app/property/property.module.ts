@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { MyHttpService } from '../shared/services/properties.service';
 import { PropertySearchComponent } from './search/property-search.component';
