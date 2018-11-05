@@ -3,21 +3,19 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { MyHttpService } from '../shared/services/properties.service';
 import { PropertySearchComponent } from './search/property-search.component';
-import { CreatePropertyComponent } from './create/create-property.component';
+import { AddPropertyComponent } from './add/add-property.component';
 import { HttpModule }    from '@angular/http';
 import { FormsModule } from '@angular/forms';
-
-
 
 
 @NgModule({
   declarations: [
     PropertySearchComponent,
-    CreatePropertyComponent
+    AddPropertyComponent
   ],
-  exports:[PropertySearchComponent,CreatePropertyComponent],
+  exports:[PropertySearchComponent,AddPropertyComponent],
   imports: [
-    BrowserModule,  HttpModule, HttpClientModule, FormsModule,
+    BrowserModule,  HttpModule, HttpClientModule, FormsModule
   ],
   providers: [MyHttpService ]
 })

@@ -26,7 +26,7 @@ Enter Search:
 <h2> Here are a list of available properties : </h2>
 
 <ul>
-  <li *ngFor="let p of propertiesDisplay"> {{p.title}} - {{p.description}} PRICE: {{p.price}} image: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64, '+p.imageOne)"></li>
+  <li *ngFor="let p of propertiesDisplay"> {{p.address}} - {{p.description}} PRICE: {{p.price}} image: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64, '+p.imageOne)"></li>
 </ul>
 
 <button (click)="prev()"> previous </button>

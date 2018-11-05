@@ -35,12 +35,14 @@ export class MyHttpService {
 
     }
 
-        createUser(user:User) {
-
-
-
+    createUser(user: User) {
         return this.http.post(environment.url + 'users', user)
             .map((response => response.json()));
-
     }
+
+    addProperty(property: Property) {
+        return this.http.post(environment.url + 'properties', property)
+            .map((response => response.json()));
+    }
+
 }
