@@ -1,0 +1,22 @@
+
+.image-container {
+    background-image: url('/assets/images/main-image.jpg');
+}
+
+.search-area {
+    position: absolute; /* or absolute */
+    top: 50%;
+    left: 25%;
+    max-width:700px;
+}
+
+.logo-text {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    font-family: 'Merriweather', serif;
+    font-size:3.5em;
+    
+    color: rgb(170, 12, 12);
+    
+}

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  url: "http://localhost:8080/"
+  url: "https://tfe0nym0e2.execute-api.us-east-2.amazonaws.com/Prod/"
 };

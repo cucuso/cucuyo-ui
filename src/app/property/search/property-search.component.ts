@@ -3,6 +3,9 @@ import { MyHttpService } from '../../shared/services/properties.service';
 import { SearchDto } from '../../shared/model/search-dto';
 import { DomSanitizer } from '@angular/platform-browser';
 
+
+declare var Tether: any;
+
 @Component({
   selector: 'property-search',
   templateUrl: './property-search.component.html',
@@ -19,21 +22,30 @@ export class PropertySearchComponent implements OnInit {
   prevPageNumber: number = 0;
   nextPageNumber: number = 10;
   searchInput: string;
-  searchDto: SearchDto = <SearchDto> {};
-  
+  searchDto: SearchDto = <SearchDto>{};
+
 
 
   // Advanced search
   showAdvanced = false;
-  fromPrice:number = 0;
+  fromPrice: number = 0;
   toPrice: number = 0;
 
   public ngOnInit() {
-    this.fetchProperties(this.searchDto, null).subscribe(data => {
-      this.properties = this.properties.concat(data.properties);
-      this.propertiesDisplay = this.properties.slice(0, 10);
-      this.pageNext = data.pagingObject;
-    });
+
+    // new Tether({
+    //   element: '.search-area',
+    //   target: '.img-banner',
+    //   attachment: 'middle center',
+    //   targetAttachment: 'middle center'
+    // });
+
+
+    // this.fetchProperties(this.searchDto, null).subscribe(data => {
+    //   this.properties = this.properties.concat(data.properties);
+    //   this.propertiesDisplay = this.properties.slice(0, 10);
+    //   this.pageNext = data.pagingObject;
+    // });
   }
 
   next() {
@@ -62,9 +74,9 @@ export class PropertySearchComponent implements OnInit {
 
   search() {
 
-    this.searchDto.search  = this.searchInput;
+    this.searchDto.search = this.searchInput;
     this.searchDto.from = this.fromPrice;
-    this.searchDto.to = this.toPrice; 
+    this.searchDto.to = this.toPrice;
 
 
     this.fetchProperties(this.searchDto, '').subscribe(data => {

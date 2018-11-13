@@ -1,34 +1,45 @@
+<div class="container-fluid text-center">
+  
+  <!-- image where all tethers will be against-->
+  <img src="/assets/images/main-image.jpg" class="img-banner" style="width:100%; opacity:0.3;" />
+  
+  <div class="logo-text">Cucuyo</div>
 
+  <!-- search box -->
+  <div class="search-area input-group mb-3">
+    <input [(ngModel)]="searchInput" id="search" type="text" class="form-control" placeholder="Enter an address, neighborhood, city or ZIP code" />
+    <div class="input-group-append">
+      <button class="btn btn-success" (click)="search()">Search</button>
+    </div>
+  </div>
 
-
-<label for="search">
-Enter Search:
-</label>
-
-<input id="search" type="text" [(ngModel)]="searchInput" />
-
-<button (click)="search()"> search </button>
-<br>
- <a href="#" (click)="showAdvanced = !showAdvanced"> {{(showAdvanced)?'hide':'show'}} advanced search.. </a>
-
-
-<div *ngIf ="showAdvanced">
-
-  From: <input type="number" [(ngModel)]="fromPrice"> 
-  To:   <input type="number" [(ngModel)]="toPrice"> 
-<br>
-
-      <input type="range" [(ngModel)]="fromPrice" min="0" max="1000000">
-
-      <input type="range" [(ngModel)]="toPrice" min="0" max="1000000">
-      <br>
 </div>
-<h2> Here are a list of available properties : </h2>
 
-<ul>
-  <li *ngFor="let p of propertiesDisplay"> {{p.address}} - {{p.description}} PRICE: {{p.price}} image: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64, '+p.imageOne)"></li>
-</ul>
+<!-- TODO Do Advanced search later-->
+<!-- <a href="#" (click)="showAdvanced = !showAdvanced"> {{(showAdvanced)?'hide':'show'}} advanced search.. </a>
 
-<button (click)="prev()"> previous </button>
 
-<button (click)="next()"> next </button>
+  <div *ngIf="showAdvanced">
+
+    From: <input type="number" [(ngModel)]="fromPrice">
+    To: <input type="number" [(ngModel)]="toPrice">
+    <br>
+
+    <input type="range" [(ngModel)]="fromPrice" min="0" max="1000000">
+
+    <input type="range" [(ngModel)]="toPrice" min="0" max="1000000">
+    <br>
+  </div>
+</div> -->
+
+
+<div *ngIf="propertiesDisplay.length > 0" class="container">
+
+  <h2>Properties: </h2>
+  <ul>
+    <li *ngFor="let p of propertiesDisplay"> {{p.address}} - {{p.description}} PRICE: {{p.price}} image: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64, '+p.imageOne)"></li>
+  </ul>
+
+  <button type="button" class="btn btn-info" (click)="prev()"> previous </button>
+  <button type="button" class="btn btn-info" (click)="next()"> next </button>
+</div>
