@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MyHttpService } from '../../shared/services/properties.service';
 import { SearchDto } from '../../shared/model/search-dto';
 import { DomSanitizer } from '@angular/platform-browser';
-
-
-declare var Tether: any;
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'property-search',
@@ -13,9 +11,11 @@ declare var Tether: any;
 })
 export class PropertySearchComponent implements OnInit {
 
-  constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer) { }
+  // DomSanitizer is used in template to show image
+  constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer, private route: ActivatedRoute) { }
   title = 'app';
 
+  searchString;
   properties = [];
   propertiesDisplay = [];
   pageNext: string = '';
@@ -31,21 +31,35 @@ export class PropertySearchComponent implements OnInit {
   fromPrice: number = 0;
   toPrice: number = 0;
 
-  public ngOnInit() {
+  public async ngOnInit() {
 
-    // new Tether({
-    //   element: '.search-area',
-    //   target: '.img-banner',
-    //   attachment: 'middle center',
-    //   targetAttachment: 'middle center'
-    // });
+    await  this.route
+    .queryParams
+    .subscribe(params => {
+      this.searchDto.search = params['q']||null;
+    });
+
+   this.getProperties();
+
+  }
 
 
-    // this.fetchProperties(this.searchDto, null).subscribe(data => {
-    //   this.properties = this.properties.concat(data.properties);
-    //   this.propertiesDisplay = this.properties.slice(0, 10);
-    //   this.pageNext = data.pagingObject;
-    // });
+  //  async getQueryParams() {
+  //   this.route
+  //   .queryParams
+  //   .subscribe(params => {
+  //     this.searchDto.search = params['q']||null;
+  //   });
+
+  // }
+
+   getProperties() {
+     console.log(this.searchDto);
+    this.fetchProperties(this.searchDto, null).subscribe(data => {
+      this.properties = this.properties.concat(data.properties);
+      this.propertiesDisplay = this.properties.slice(0, 10);
+      this.pageNext = data.pagingObject;
+    });
   }
 
   next() {

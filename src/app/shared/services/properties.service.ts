@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/map';
 
@@ -30,18 +30,18 @@ export class MyHttpService {
         }
 
 
-        return this.http.get(environment.url + 'properties', { search: searchParams })
+        return this.http.get(environment.url + '/properties', { search: searchParams })
             .map((response => response.json()));
 
     }
 
     createUser(user: User) {
-        return this.http.post(environment.url + 'users', user)
+        return this.http.post(environment.url + '/users', user)
             .map((response => response.json()));
     }
 
     addProperty(property: Property) {
-        return this.http.post(environment.url + 'properties', property)
+        return this.http.post(environment.url + '/properties', property)
             .map((response => response.json()));
     }
 

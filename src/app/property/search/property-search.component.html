@@ -1,18 +1,38 @@
-<div class="container-fluid text-center">
-  
-  <!-- image where all tethers will be against-->
-  <img src="/assets/images/main-image.jpg" class="img-banner" style="width:100%; opacity:0.3;" />
-  
-  <div class="logo-text">Cucuyo</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-7">I owe you map</div>
+    <div class="col-4  offset-1">
+      <div class="card property-cards">
+        <div class="card-body">
+          <h2>Properties: </h2>
+          <ul>
 
-  <!-- search box -->
-  <div class="search-area input-group mb-3">
-    <input [(ngModel)]="searchInput" id="search" type="text" class="form-control" placeholder="Enter an address, neighborhood, city or ZIP code" />
-    <div class="input-group-append">
-      <button class="btn btn-success" (click)="search()">Search</button>
+
+            <div class="row">
+              <div *ngFor="let p of propertiesDisplay" class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <!-- TODO store image files in s3 store path in db, change db image from blob to string store path -->
+                    <img src="https://photos.zillowstatic.com/p_e/IS2fwxbc0thy161000000000.jpg" style="max-width: 100%;">
+                  </div>
+                  <div class="card-title">${{p.price}}</div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- <li *ngFor="let p of propertiesDisplay"> {{p.address}} - {{p.description}} PRICE: {{p.price}} -->
+            <!-- image: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64, '+p.imageOne)"></li> -->
+          </ul>
+        </div>
+        <div class="card-footer text-muted text-center">
+          <button type="button" class="btn btn-info" (click)="prev()"> previous </button>
+          <button type="button" class="btn btn-info" (click)="next()"> next </button>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
 
 <!-- TODO Do Advanced search later-->
@@ -31,15 +51,3 @@
     <br>
   </div>
 </div> -->
-
-
-<div *ngIf="propertiesDisplay.length > 0" class="container">
-
-  <h2>Properties: </h2>
-  <ul>
-    <li *ngFor="let p of propertiesDisplay"> {{p.address}} - {{p.description}} PRICE: {{p.price}} image: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64, '+p.imageOne)"></li>
-  </ul>
-
-  <button type="button" class="btn btn-info" (click)="prev()"> previous </button>
-  <button type="button" class="btn btn-info" (click)="next()"> next </button>
-</div>

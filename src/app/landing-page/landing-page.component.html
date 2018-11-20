@@ -1,0 +1,16 @@
+<div class="container-fluid text-center">
+  
+  <!-- image where all tethers will be against-->
+  <img src="/assets/images/main-image.jpg" class="img-banner" style="width:100%; opacity:0.3;" />
+  
+  <div class="logo-text">Cucuyo</div>
+
+  <!-- search box -->
+  <div class="search-area input-group mb-3">
+    <input (keyup.enter)="search()" [(ngModel)]="searchInput" id="search" type="text" class="form-control" placeholder="Enter an address, neighborhood, city or ZIP code" />
+    <div class="input-group-append">
+      <button class="btn btn-success" (click)="search()" >Search</button>
+    </div>
+  </div>
+
+</div>

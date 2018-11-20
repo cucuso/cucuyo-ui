@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyHttpService } from '../../shared/services/properties.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var mapboxgl;
 declare var MapboxGeocoder;
@@ -14,8 +15,7 @@ export class AddPropertyComponent implements OnInit {
 
   property: any = {};
 
-  constructor(private service: MyHttpService) { }
-
+  constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer) { }
 
 
   public ngOnInit() {
@@ -36,8 +36,24 @@ export class AddPropertyComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.property);
     this.service.addProperty(this.property).subscribe();
   }
 
+
+  changeListener($event): void {
+    this.property.images = [];
+    this.readThis($event.target);
+  }
+
+  async readThis(inputValue: any) {
+    for (let i = 0; i < inputValue.files.length; i++) {
+     
+      let myReader: FileReader = new FileReader();
+      await myReader.readAsDataURL(inputValue.files[i]);
+      await (myReader.onloadend = (e) => {
+             this.property.images[i] = myReader.result;
+           });
+
+    }
+  }
 }

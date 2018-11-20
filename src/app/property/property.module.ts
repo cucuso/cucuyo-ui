@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MyHttpService } from '../shared/services/properties.service';
 import { PropertySearchComponent } from './search/property-search.component';
 import { AddPropertyComponent } from './add/add-property.component';
-import { HttpModule }    from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'primeng/primeng';
 
 
 @NgModule({
@@ -13,10 +14,10 @@ import { FormsModule } from '@angular/forms';
     PropertySearchComponent,
     AddPropertyComponent
   ],
-  exports:[PropertySearchComponent,AddPropertyComponent],
+  exports: [PropertySearchComponent, AddPropertyComponent],
   imports: [
-    BrowserModule,  HttpModule, HttpClientModule, FormsModule
+    BrowserModule, HttpModule, HttpClientModule, FormsModule, FileUploadModule
   ],
-  providers: [MyHttpService ]
+  providers: [MyHttpService]
 })
 export class PropertyModule { }

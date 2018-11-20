@@ -12,12 +12,15 @@ import { AddPropertyComponent } from './property/add/add-property.component';
 import { UserModule } from './user/user.module';
 import { SignUpComponent } from './user/signup.component';
 import { PropertySearchComponent } from './property/search/property-search.component';
+import { LandingPageModule } from './landing-page/landing-page.module';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const appRoutes: Routes = [
   { path: 'users', component: SignUpComponent },
-  { path: 'add', component: AddPropertyComponent },
+  { path: 'create', component: AddPropertyComponent },
   { path: 'search', component: PropertySearchComponent  },
-  { path: '**', redirectTo: '/search', pathMatch: 'full' }
+  { path: '', component: LandingPageComponent, pathMatch: "full"},
+  { path: '**',  redirectTo: '', component:LandingPageComponent }
 ];
 
 
@@ -26,7 +29,7 @@ const appRoutes: Routes = [
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpModule, HttpClientModule, FormsModule, PropertyModule, UserModule,
+    BrowserModule, HttpModule, HttpClientModule, FormsModule, PropertyModule, UserModule, LandingPageModule,
     RouterModule.forRoot(
       appRoutes,
     )

@@ -21,7 +21,6 @@
     
 }
 
-.property-cards {
-    overflow:auto;
-    height:100vh;
+.container-fluid {
+    padding:0px;
 }
