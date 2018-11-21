@@ -3,6 +3,6 @@
         title: string;
         description: string;
         price: number;
-        images: [];
+        images: string[];
         address: string;
     }
