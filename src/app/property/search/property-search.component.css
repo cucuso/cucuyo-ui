@@ -35,3 +35,7 @@
 .properties-div {
     padding:0px;
 }
+
+.card {
+   cursor: pointer;
+}

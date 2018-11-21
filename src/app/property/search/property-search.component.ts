@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyHttpService } from '../../shared/services/properties.service';
 import { SearchDto } from '../../shared/model/search-dto';
+import { Property } from '../../shared/model/property';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,15 +19,13 @@ export class PropertySearchComponent implements OnInit {
   // DomSanitizer is used in template to show image
   constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer, private route: ActivatedRoute) { }
 
-  searchString;
   properties = [];
   propertiesDisplay = [];
   pageNext: string = '';
   prevPageNumber: number = 0;
   nextPageNumber: number = 10;
-  searchInput: string;
   searchDto: SearchDto = <SearchDto>{};
-
+  selectedProperty = <Property>{};
 
 
   // Advanced search
@@ -39,10 +38,12 @@ export class PropertySearchComponent implements OnInit {
     await  this.route
     .queryParams
     .subscribe(params => {
+      console.log("we");
       this.searchDto.search = params['q']||null;
+      this.getProperties();
     });
 
-    this.getProperties();
+    
 
    mapboxgl.accessToken = 'pk.eyJ1IjoiZWRlbm4wMDEiLCJhIjoiY2pvM2pqaXR6MHh1NTN2bm56ZHk2ZjJpbiJ9.1mOe1OEN5vm1G9_U-P9LYA';
    var map = new mapboxgl.Map({
@@ -84,20 +85,6 @@ export class PropertySearchComponent implements OnInit {
       this.nextPageNumber -= 10;
       this.propertiesDisplay = (this.properties.slice(this.prevPageNumber, this.nextPageNumber));
     }
-  }
-
-  search() {
-
-    this.searchDto.search = this.searchInput;
-    this.searchDto.from = this.fromPrice;
-    this.searchDto.to = this.toPrice;
-
-
-    this.fetchProperties(this.searchDto, '').subscribe(data => {
-      this.pageNext = data.pagingObject;
-      this.properties = data.properties;
-      this.propertiesDisplay = this.properties.slice(0, 10);
-    });
   }
 
   private fetchProperties(searchDto: SearchDto, pagingObject: string): any {
