@@ -1,0 +1,54 @@
+
+<app-navbar></app-navbar>
+
+
+<div *ngIf="!isUserCreated" class="container">
+
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" role="tab" aria-selected="true" (click)="selectedTab = 'signup'">Signup</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" aria-selected="false" (click)="selectedTab = 'login'">Login</a>
+    </div>
+  </nav>
+
+  <div *ngIf="selectedTab == 'signup'" class="signup">
+    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+      <input #email="ngModel" type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="email"
+        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required />
+      <small class="alert alert-danger" *ngIf="email.invalid"> Email is invalid </small>
+
+      <input #password="ngModel" type="password" class="form-control" [(ngModel)]="user.password" name="password"
+        placeholder="password" minlength="5" required />
+
+      <small class="alert alert-danger" *ngIf="password.invalid"> Password is invalid </small>
+
+      <input #verificationPw="ngModel" type="password" class="form-control" [(ngModel)]="verifiedPassword" name="verifiedPassword"
+        placeholder="verify password" required />
+      <small class="alert alert-danger" *ngIf="verificationPw.value != user.password"> Passwords do not match </small>
+
+      <button type="submit" class="btn btn-success" [disabled]="!signupForm.form.valid || verificationPw.value != user.password">Sign
+        Up</button>
+
+    </form>
+  </div>
+
+  <div *ngIf="selectedTab == 'login'">
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <input #email="ngModel" type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="email"
+        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required />
+
+
+      <input #password="ngModel" type="password" class="form-control" [(ngModel)]="user.password" name="password"
+        placeholder="password" minlength="5" required />
+
+      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid ">Login</button>
+
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="isUserCreated" class="container">
+  Congrats user was created!
+</div>

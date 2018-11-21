@@ -1,12 +1,17 @@
-<div class="container-fluid">
+<app-navbar [searchQuery]= "searchDto.search"></app-navbar>
+
+<div class="container-fluid search-area">
   <div class="row">
-    <div class="col-7">I owe you map</div>
-    <div class="col-4  offset-1">
+    <div class="col-8 map-div">
+      
+        <div id="map"></div>
+    
+    </div>
+    <div class="col-4 properties-div">
       <div class="card property-cards">
         <div class="card-body">
           <h2>Properties: </h2>
           <ul>
-
 
             <div class="row">
               <div *ngFor="let p of propertiesDisplay" class="col-6">

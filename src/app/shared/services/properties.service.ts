@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { Property } from '../model/property';
 import { SearchDto } from '../model/search-dto';
 import { User } from '../model/user';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
@@ -36,8 +38,10 @@ export class MyHttpService {
     }
 
     createUser(user: User) {
-        return this.http.post(environment.url + '/users', user)
-            .map((response => response.json()));
+        return Observable.of("success");
+
+        // return this.http.post(environment.url + '/users', user)
+        //     .map((response => response.json()));
     }
 
     addProperty(property: Property) {

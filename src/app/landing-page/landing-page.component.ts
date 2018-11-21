@@ -13,7 +13,7 @@ export class LandingPageComponent {
   searchInput: string;
 
   search() {
-    console.log("go to search..");
+    console.log("navigating to search..");
     this.router.navigate(['/search'], { queryParams: { q: this.searchInput }});
   }
 

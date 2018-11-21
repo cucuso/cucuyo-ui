@@ -7,16 +7,16 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-import { PropertyModule } from './property/property.module';
 import { AddPropertyComponent } from './property/add/add-property.component';
-import { UserModule } from './user/user.module';
-import { SignUpComponent } from './user/signup.component';
+import { AccountManagementComponent } from './account/management/management.component';
+import { LoginComponent } from './account/login/login.component';
 import { PropertySearchComponent } from './property/search/property-search.component';
-import { LandingPageModule } from './landing-page/landing-page.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const appRoutes: Routes = [
-  { path: 'users', component: SignUpComponent },
+  { path: 'account', component: AccountManagementComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'create', component: AddPropertyComponent },
   { path: 'search', component: PropertySearchComponent  },
   { path: '', component: LandingPageComponent, pathMatch: "full"},
@@ -26,10 +26,17 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    LandingPageComponent,
+    AccountManagementComponent,
+    LoginComponent,
+    AddPropertyComponent,
+    PropertySearchComponent
   ],
+  exports:[NavbarComponent],
   imports: [
-    BrowserModule, HttpModule, HttpClientModule, FormsModule, PropertyModule, UserModule, LandingPageModule,
+    BrowserModule, HttpModule, HttpClientModule, FormsModule,
     RouterModule.forRoot(
       appRoutes,
     )

@@ -6,3 +6,11 @@
   .ui-fileupload-buttonbar button:not(.ui-fileupload-choose) {  
     display: none;  
   } 
+
+  .custom-file-input ~ .custom-file-label::after {
+    content: "Browse";
+}
+
+.container {
+  margin-top:50px;
+}

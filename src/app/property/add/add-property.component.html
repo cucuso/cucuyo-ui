@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="container">
   <div class="row">
     <div class="col-lg">
@@ -29,22 +31,19 @@
 
         <div>
           <h2> Add Images</h2>
-          <input name="images" type="file" accept="image/*" maxFileSize="400000" multiple (change)="changeListener($event)" />
-          <button>upload</button>
+          <div class="custom-file">
+          <input name="images" class="custom-file-input" type="file" accept="image/*" maxFileSize="400000" multiple (change)="changeListener($event)" />
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+          <button class="btn btn-info">upload</button>
         </div>
 
       </form>
 
     </div>
 
-
-
     <div class="col-sm">
-
-      {{property.address}}
-
-      <div id="map"></div>
-
+    <div id="map"></div>
     </div>
   </div>
 

@@ -4,10 +4,7 @@
 }
 
 .search-area {
-    position: absolute; /* or absolute */
-    top: 50%;
-    left: 25%;
-    max-width:700px;
+   padding-right: 0px;
 }
 
 .logo-text {
@@ -23,5 +20,18 @@
 
 .property-cards {
     overflow:auto;
-    height:100vh;
+    height:94vh;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+  }
+
+.map-div {
+    padding:0px;
+}
+
+.properties-div {
+    padding:0px;
 }
