@@ -38,8 +38,8 @@ export class PropertySearchComponent implements OnInit {
     await  this.route
     .queryParams
     .subscribe(params => {
-      console.log("we");
       this.searchDto.search = params['q']||null;
+      this.properties = [];
       this.getProperties();
     });
 
