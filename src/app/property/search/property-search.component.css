@@ -36,6 +36,21 @@
     padding:0px;
 }
 
-.card {
+.property-card {
    cursor: pointer;
+   overflow: hidden;
+   height:160px;
+   text-align: center;
+}
+
+.img {
+    max-height:400px;
+}
+
+.all-cards-body {
+    background-color:#17a3b810;
+}
+
+.prop-card {
+    margin-top:4px;
 }

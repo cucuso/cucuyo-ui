@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MyHttpService } from '../../shared/services/properties.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -14,8 +14,11 @@ declare var MapboxGeocoder;
 export class AddPropertyComponent implements OnInit {
 
   property: any = {};
+  marker;
+
 
   constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer) { }
+
 
 
   public ngOnInit() {
@@ -29,10 +32,28 @@ export class AddPropertyComponent implements OnInit {
     });
 
     map.addControl(new MapboxGeocoder({
-      // limit results to Australia
+      // limit results to Cuba
       accessToken: mapboxgl.accessToken,
       country: 'cu',
     }));
+
+
+    map.on('click', (e) => {
+
+      this.property.longitude = e.lngLat.lng;
+      this.property.latitude = e.lngLat.lat;
+
+      if (this.marker !== undefined) {
+        this.marker.remove();
+      }
+
+      this.marker = new mapboxgl.Marker({ "color": "#b40219" })
+        .setLngLat(e.lngLat)
+        .addTo(map);
+
+
+
+    });
   }
 
   onSubmit() {
@@ -47,13 +68,12 @@ export class AddPropertyComponent implements OnInit {
 
   async readThis(inputValue: any) {
     for (let i = 0; i < inputValue.files.length; i++) {
-     
+
       let myReader: FileReader = new FileReader();
       await myReader.readAsDataURL(inputValue.files[i]);
       await (myReader.onloadend = (e) => {
-             this.property.images[i] = myReader.result;
-           });
-
+        this.property.images[i] = myReader.result;
+      });
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MyHttpService } from '../../shared/services/properties.service';
 import { SearchDto } from '../../shared/model/search-dto';
 import { Property } from '../../shared/model/property';
@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 declare var mapboxgl;
 declare var MapboxGeocoder;
+declare var jQuery: any;
 
 @Component({
   selector: 'property-search',
@@ -33,33 +34,62 @@ export class PropertySearchComponent implements OnInit {
   fromPrice: number = 0;
   toPrice: number = 0;
 
-  public async ngOnInit() {
+  map: any;
+  @ViewChild('exampleModal') modal: ElementRef;
 
-    await  this.route
-    .queryParams
-    .subscribe(params => {
-      this.searchDto.search = params['q']||null;
-      this.properties = [];
-      this.getProperties();
+  async ngOnInit() {
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZWRlbm4wMDEiLCJhIjoiY2pvM2pqaXR6MHh1NTN2bm56ZHk2ZjJpbiJ9.1mOe1OEN5vm1G9_U-P9LYA';
+
+    this.map = new mapboxgl.Map({
+      container: 'map',
+      center: [-78.9812, 21.5218],
+      zoom: 6,
+      style: 'mapbox://styles/mapbox/streets-v10'
     });
 
-    
+    await this.route
+      .queryParams
+      .subscribe(params => {
+        this.searchDto.search = params['q'] || null;
+        this.properties = [];
 
-   mapboxgl.accessToken = 'pk.eyJ1IjoiZWRlbm4wMDEiLCJhIjoiY2pvM2pqaXR6MHh1NTN2bm56ZHk2ZjJpbiJ9.1mOe1OEN5vm1G9_U-P9LYA';
-   var map = new mapboxgl.Map({
-     container: 'map',
-     center: [-78.9812, 21.5218],
-     zoom: 6,
-     style: 'mapbox://styles/mapbox/streets-v10'
-   });
+        this.getProperties();
+      });
+
+
 
   }
 
-   getProperties() {
+  addMarkers() {
+    this.properties.forEach(property => {
+      if (property.longitude != null && property.latitude != null) {
+
+        var el = document.createElement('div');
+        el.style.backgroundImage= 'url(assets/images/marker.svg)';
+        el.style.width ='30px';
+        el.style.height ='30px';
+
+        new mapboxgl.Marker(el)
+          .setLngLat({ lng: property.longitude, lat: property.latitude })
+          .addTo(this.map);
+
+        el.addEventListener('click', e => {
+          this.selectedProperty = property;
+          jQuery(this.modal.nativeElement).modal('show');
+        });
+
+      }
+    });
+  }
+
+  getProperties() {
     this.fetchProperties(this.searchDto, null).subscribe(data => {
       this.properties = this.properties.concat(data.properties);
+
       this.propertiesDisplay = this.properties.slice(0, 10);
       this.pageNext = data.pagingObject;
+      this.addMarkers();
     });
   }
 

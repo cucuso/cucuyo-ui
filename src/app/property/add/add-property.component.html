@@ -50,6 +50,5 @@
 </div>
 
 
-
 <li *ngFor="let image of property.images; let i=index;">
   image {{i}}: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(image)"></li>
