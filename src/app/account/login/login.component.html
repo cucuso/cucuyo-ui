@@ -1,54 +1,71 @@
-
 <app-navbar></app-navbar>
 
+<div class="container">
+  <div *ngIf="!isUserCreated">
 
-<div *ngIf="!isUserCreated" class="container">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" role="tab" aria-selected="true" (click)="selectedTab = 'signup'">Signup</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" aria-selected="false" (click)="selectedTab = 'login'">Login</a>
+      </div>
+    </nav>
 
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" role="tab" aria-selected="true" (click)="selectedTab = 'signup'">Signup</a>
-      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" aria-selected="false" (click)="selectedTab = 'login'">Login</a>
+    <div *ngIf="selectedTab == 'signup'" class="signup">
+      <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+        <div class="form-group">
+          <label class="form-check-label" for="email">Email</label>
+          <input #email="ngModel" type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="email"
+            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required />
+          <small class="alert alert-danger" *ngIf="!email.pristine && email.invalid"> Email is invalid </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-check-label" for="email">Password</label>
+          <input #password="ngModel" type="password" class="form-control" [(ngModel)]="user.password" name="password"
+            placeholder="password" minlength="5" required />
+
+          <small class="alert alert-danger" *ngIf="!signupForm.pristine &&  password.invalid"> Password tiene que tener
+            por lo menos 5 caracters</small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-check-label" for="verifiedPassword">Password</label>
+          <input #verificationPw="ngModel" type="password" class="form-control" [(ngModel)]="verifiedPassword" name="verifiedPassword"
+            placeholder="verify password" required />
+          <small class="alert alert-danger" *ngIf="!password.pristine && verificationPw.value != user.password">
+            Passwords do not match </small>
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="!signupForm.form.valid || verificationPw.value != user.password">Crear Cuenta</button>
+
+      </form>
     </div>
-  </nav>
 
-  <div *ngIf="selectedTab == 'signup'" class="signup">
-    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
-      <input #email="ngModel" type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="email"
-        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required />
-      <small class="alert alert-danger" *ngIf="email.invalid"> Email is invalid </small>
+    <div *ngIf="selectedTab == 'login'">
 
-      <input #password="ngModel" type="password" class="form-control" [(ngModel)]="user.password" name="password"
-        placeholder="password" minlength="5" required />
+      <form (ngSubmit)="login()" #loginForm="ngForm">
 
-      <small class="alert alert-danger" *ngIf="password.invalid"> Password is invalid </small>
+        <div class="form-group">
+          <label class="form-check-label" for="email">Email</label>
+          <input #email="ngModel" type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="email"
+            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required />
+        </div>
 
-      <input #verificationPw="ngModel" type="password" class="form-control" [(ngModel)]="verifiedPassword" name="verifiedPassword"
-        placeholder="verify password" required />
-      <small class="alert alert-danger" *ngIf="verificationPw.value != user.password"> Passwords do not match </small>
+        <div class="form-group">
+          <label class="form-check-label" for="password">Password</label>
+          <input #password="ngModel" type="password" class="form-control" [(ngModel)]="user.password" name="password"
+            placeholder="password" minlength="5" required />
+        </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!signupForm.form.valid || verificationPw.value != user.password">Sign
-        Up</button>
+        <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid ">Iniciar Sesión</button>
 
-    </form>
+      </form>
+
+    </div>
   </div>
 
-  <div *ngIf="selectedTab == 'login'">
-
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-      <input #email="ngModel" type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="email"
-        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required />
-
-
-      <input #password="ngModel" type="password" class="form-control" [(ngModel)]="user.password" name="password"
-        placeholder="password" minlength="5" required />
-
-      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid ">Login</button>
-
-    </form>
-
+  <div *ngIf="isUserCreated">
+    <span *ngIf="selectedTab=='signup'">El Usario se creo!</span>
+    <span *ngIf="selectedTab=='login'">Ya estas logged in!</span>
   </div>
-</div>
-
-<div *ngIf="isUserCreated" class="container">
-  Congrats user was created!
 </div>

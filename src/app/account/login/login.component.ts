@@ -1,37 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { MyHttpService } from '../../shared/services/properties.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { UserService } from '../../shared/services/user.service';
 import { User } from '../../shared/model/user';
+import { NavbarComponent } from '../../navbar/navbar.component';
+
 
 @Component({
   selector: 'sign-up',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: MyHttpService) { }
+  constructor(private service: UserService) { }
 
   user: User = <User>{};
-  isUserCreated:boolean;
+  isUserCreated: boolean;
   selectedTab = "signup";
-  token;
+  @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
-  public ngOnInit() { 
-    
-    this.token = localStorage.getItem("token");
-
-  }
+  public ngOnInit() {}
 
   onSubmit() {
-    this.service.createUser(this.user).subscribe(r=> {
+
+    this.service.createUser(this.user).subscribe(r => {
+
+      this.isUserCreated = true;
+      localStorage.setItem("token", r.token);
+
+      this.navbar.refresh();
+    });
+  }
+
+  login() {
+
+    this.service.login(this.user).subscribe(r => {
       
-      if(r == "success"){
-        this.isUserCreated = true;
-        localStorage.setItem("token","TEST TOKEN");
-      }
-      
-      console.log(r)
-    
-    
+      this.isUserCreated = true;
+      localStorage.setItem("token", r.token);
+
+      this.navbar.refresh();
     });
   }
 

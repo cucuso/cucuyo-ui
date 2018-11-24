@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/map';
 
 import { Property } from '../model/property';
 import { SearchDto } from '../model/search-dto';
-import { User } from '../model/user';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 
 
 @Injectable()
-export class MyHttpService {
-    constructor(private http: Http) { }
+export class PropertyService {
+    constructor(private http: Http, public authHttp: AuthHttp) { }
 
     getProperties(searchDto: SearchDto, page: string) {
         const searchParams = new URLSearchParams();
@@ -37,15 +35,8 @@ export class MyHttpService {
 
     }
 
-    createUser(user: User) {
-        return Observable.of("success");
-
-        // return this.http.post(environment.url + '/users', user)
-        //     .map((response => response.json()));
-    }
-
     addProperty(property: Property) {
-        return this.http.post(environment.url + '/properties', property)
+        return this.authHttp.post(environment.url + '/properties', property)
             .map((response => response.json()));
     }
 

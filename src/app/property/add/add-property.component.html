@@ -1,54 +1,77 @@
 <app-navbar></app-navbar>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg">
-      <h1> Add Property</h1>
+<div [hidden]="isPropertySubmitted">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg">
+        <h1>Agregar Propiedad</h1>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm">
+        <form (ngSubmit)="onSubmit()" #propertyForm="ngForm">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Dirección</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="property.address" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Descripción</label>
+            <textarea type="text" class="form-control" name="exampleInputPassword1" [(ngModel)]="property.description"
+              required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label" for="exampleCheck1">Precio</label>
+            <input type="number" min="0.00" max="10000.00" step="1.0" class="form-control" name="exampleCheck1"
+              [(ngModel)]="property.price" required>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label" for="exampleCheck1">Telefono</label>
+            <input type="phone-number" class="form-control" name="exampleCheck1" [(ngModel)]="property.phone" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check-label" for="exampleCheck1">Imagenes</label>
+            <div class="custom-file">
+              <input name="images" class="custom-file-input" type="file" accept="image/*" maxFileSize="400000" multiple
+                (change)="changeListener($event)" required />
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+
+
+          <button class="btn btn-info" [disabled]="isInvalidForm()">Subir</button>
+
+        </form>
+
+      </div>
+
+      <div class="col-sm">
+          <div class="alert alert-info" role="alert">
+             <h2>Requisitos para agregar propiedad:</h2>
+            <ul>
+              <li>Todos los fields esten completo</li>
+              <li>Subir una a tres fotos</li>
+              <li><b>Clickea en el mapa donde esta la propiedad</b></li>
+            </ul>
+
+            </div>
+        <div id="map"></div>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-
-    <div class="col-sm">
-      <form (ngSubmit)="onSubmit()" #propertyForm="ngForm">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Address</label>
-          <input type="text" class="form-control" name="title" [(ngModel)]="property.address">
+  <div class="container">
+    <div class="row">
+      <div class="col-6" *ngFor="let image of property.images; let i=index;">
+        <div class="upload-images">
+          <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(image)" class="upload-img">
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Description</label>
-          <textarea type="text" class="form-control" name="exampleInputPassword1" [(ngModel)]="property.description"></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-check-label" for="exampleCheck1">Price</label>
-          <input type="number" min="0.00" max="10000.00" step="1.0" class="form-control" name="exampleCheck1"
-            [(ngModel)]="property.price">
-        </div>
-        <div class="form-group">
-          <label class="form-check-label" for="exampleCheck1">Phone</label>
-          <input type="phone-number" class="form-control" name="exampleCheck1">
-        </div>
-
-        <div>
-          <h2> Add Images</h2>
-          <div class="custom-file">
-          <input name="images" class="custom-file-input" type="file" accept="image/*" maxFileSize="400000" multiple (change)="changeListener($event)" />
-          <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-          <button class="btn btn-info">upload</button>
-        </div>
-
-      </form>
-
-    </div>
-
-    <div class="col-sm">
-    <div id="map"></div>
+      </div>
     </div>
   </div>
-
 </div>
-
-
-<li *ngFor="let image of property.images; let i=index;">
-  image {{i}}: <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(image)"></li>
+<div *ngIf="isPropertySubmitted">
+  La propiedad fue subida!
+</div>

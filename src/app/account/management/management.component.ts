@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MyHttpService } from '../../shared/services/properties.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
-  selector: 'sign-up',
+  selector: 'acct-management',
   templateUrl: './management.component.html',
   styleUrls: ['./management.component.css']
 })
 export class AccountManagementComponent implements OnInit {
 
-  constructor(private service: MyHttpService, private router: Router) { }
+  constructor(private auth: AuthService, private service: UserService) { }
 
-  token;
+  userEmail;
+  userObj = {properties:[]};
 
   public ngOnInit() {
-    this.token = localStorage.getItem("token");
+    this.userEmail = this.auth.getEmail();
 
-    if(this.token == null) {
-      this.router.navigate(['/login']);
-    }
-   }
+    this.service.getUserInfo(this.userEmail).subscribe(r => this.userObj = r);
+  }
 
 }

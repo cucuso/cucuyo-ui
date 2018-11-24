@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MyHttpService } from '../../shared/services/properties.service';
+import { Component, OnInit } from '@angular/core';
+import { PropertyService } from '../../shared/services/properties.service';
 import { DomSanitizer } from '@angular/platform-browser';
+
 
 declare var mapboxgl;
 declare var MapboxGeocoder;
+declare var jQuery: any;
 
 
 @Component({
@@ -15,9 +17,11 @@ export class AddPropertyComponent implements OnInit {
 
   property: any = {};
   marker;
+  isPropertySubmitted:boolean = false;
 
 
-  constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer) { }
+
+  constructor(private service: PropertyService, private _DomSanitizationService: DomSanitizer) { }
 
 
 
@@ -51,13 +55,16 @@ export class AddPropertyComponent implements OnInit {
         .setLngLat(e.lngLat)
         .addTo(map);
 
-
-
     });
+
   }
 
   onSubmit() {
-    this.service.addProperty(this.property).subscribe();
+    this.service.addProperty(this.property).subscribe(
+      r => {
+        this.isPropertySubmitted = true;
+      }
+    );
   }
 
 
@@ -75,5 +82,9 @@ export class AddPropertyComponent implements OnInit {
         this.property.images[i] = myReader.result;
       });
     }
+  }
+
+  isInvalidForm(): boolean {
+    return this.property.address == null || this.property.description == null || this.property.phone == null || this.property.price == null || this.property.images == null || this.property.latitude == null || this.property.longitude == null || (this.property.images.length < 1 && this.property.images.length > 3);
   }
 }

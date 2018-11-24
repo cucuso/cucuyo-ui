@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MyHttpService } from '../../shared/services/properties.service';
+import { PropertyService } from '../../shared/services/properties.service';
 import { SearchDto } from '../../shared/model/search-dto';
 import { Property } from '../../shared/model/property';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -18,7 +18,7 @@ export class PropertySearchComponent implements OnInit {
 
   // TODO if area not found default to havana
   // DomSanitizer is used in template to show image
-  constructor(private service: MyHttpService, private _DomSanitizationService: DomSanitizer, private route: ActivatedRoute) { }
+  constructor(private service: PropertyService, private _DomSanitizationService: DomSanitizer, private route: ActivatedRoute) { }
 
   properties = [];
   propertiesDisplay = [];
