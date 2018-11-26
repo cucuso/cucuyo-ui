@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
   userEmail;
 
   ngOnInit() {
-    console.log(this.auth.loggedIn());
     this.isUserLoggedIn = this.auth.loggedIn();
     this.userEmail = this.auth.getEmail();
   }

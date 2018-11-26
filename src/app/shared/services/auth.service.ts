@@ -8,7 +8,6 @@ export class AuthService {
 
 
     loggedIn() {
-        console.log( tokenNotExpired("token", localStorage.getItem("token")))
         return tokenNotExpired();
     }
 
