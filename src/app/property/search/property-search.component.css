@@ -39,8 +39,9 @@
 .property-card {
    cursor: pointer;
    overflow: hidden;
-   height:160px;
+   height:190px;
    text-align: center;
+   padding:0px;
 }
 
 .img {
@@ -53,4 +54,14 @@
 
 .prop-card {
     margin-top:4px;
+}
+
+.bottom-right{
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Merriweather', serif;
+
 }

@@ -3,33 +3,34 @@
   <div class="row">
 
     <!-- MAP section-->
-    <div class="col-8 map-div">
+    <div class="col-lg-7 map-div d-none d-md-block">
       <div id="map"></div>
     </div>
 
 
     <!-- Property card section-->
-    <div class="col-4 properties-div">
+    <div class="col-lg-5  col-md-12 properties-div">
       <div class="card property-cards">
         <div class="card-body all-cards-body">
           <h2>{{searchDto.search}} </h2>
-          <ul>
+
 
             <div class="row">
-              <div *ngFor="let p of propertiesDisplay" class="col-6">
+              <div *ngFor="let p of propertiesDisplay" class="col-lg-6 col-md-12">
                 <div class="card prop-card" data-toggle="modal" data-target="#exampleModal" (click)="selectedProperty = p;">
                   <div class="card-body property-card">  
                     <!-- TODO store image files in s3 store path in db, change db image from blob to string store path -->
-                    <img *ngIf="p.images != null && p.images.length > 0" src="https://s3.us-east-2.amazonaws.com/cucuyo-images/{{p.images[0]}}" style="max-width: 100%;">
-                    <img *ngIf="p.images == null || p.images.length == 0" src="assets/images/no-image.png" style="max-height: 80px;">
+                    
+                    
+                    <img *ngIf="p.images != null && p.images.length > 0" src="https://s3.us-east-2.amazonaws.com/cucuyo-images/{{p.images[0]}}" style="width: 100%;">
+                    <img *ngIf="p.images == null || p.images.length == 0" src="assets/images/no-image.png" style="width: 100%;">
+                    <div class="bottom-right">{{p.price|currency:'CUC'}}</div>
                   </div>
-                  <div class="card-footer">{{p.price|currency:'CUC'}}</div>
                 </div>
               </div>
             </div>
 
 
-          </ul>
         </div>
         <div class="card-footer text-muted text-center">
           <button type="button" class="btn btn-info" (click)="prev()"> previous </button>
@@ -88,7 +89,6 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
         {{selectedProperty.address}} - {{selectedProperty.description}} PRICE: {{selectedProperty.price}}
       </div>
 

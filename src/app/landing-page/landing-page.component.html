@@ -6,10 +6,10 @@
   <div class="logo-text">Cucuyo</div>
 
   <!-- search box -->
-  <div class="search-area input-group mb-3">
-    <input (keyup.enter)="search()" [(ngModel)]="searchInput" id="search" type="text" class="form-control" placeholder="Enter an address, neighborhood, city or ZIP code" />
+  <div class="search-area input-group">
+    <input (keyup.enter)="search()" [(ngModel)]="searchInput" id="search" type="text" class="form-control" placeholder="Pon dirrecion, barrio, o ciudad" />
     <div class="input-group-append">
-      <button class="btn btn-success" (click)="search()" >Search</button>
+      <button class="btn btn-success" (click)="search()">Buscar</button>
     </div>
   </div>
 

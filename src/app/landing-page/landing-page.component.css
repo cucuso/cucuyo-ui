@@ -3,11 +3,33 @@
     background-image: url('/assets/images/main-image.jpg');
 }
 
+
 .search-area {
-    position: absolute; /* or absolute */
+    position: absolute;
     top: 50%;
-    left: 25%;
+    left: 20%;
     max-width:700px;
+}
+
+@media (max-width: 1000px) {
+    .search-area {
+        max-width:500px;
+        left: 20%;
+    }
+}
+
+@media (max-width: 700px) {
+    .search-area {
+        max-width:400px;
+        left: 15%;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-area {
+        max-width:300px;
+        left: 13%;
+    }
 }
 
 .logo-text {
