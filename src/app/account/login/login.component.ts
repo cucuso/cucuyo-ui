@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    this.service.createUser(this.user).subscribe(r => {
+    let newCourse= 
+
+    this.service.createUser(Object.assign({}, this.user)).subscribe(r => {
 
       this.isUserCreated = true;
       localStorage.setItem("token", r.token);
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    this.service.login(this.user).subscribe(r => {
+    this.service.login(Object.assign({}, this.user)).subscribe(r => {
       
       this.isUserCreated = true;
       localStorage.setItem("token", r.token);

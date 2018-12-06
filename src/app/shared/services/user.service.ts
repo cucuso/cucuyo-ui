@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { User } from '../model/user';
 import { environment } from '../../../environments/environment';
-import {Md5} from 'ts-md5/dist/md5';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Injectable()
 export class UserService {
@@ -22,12 +22,16 @@ export class UserService {
     }
 
     getUserInfo(email) {
-        return this.http.get(environment.url + '/users/'+email)
+        return this.http.get(environment.url + '/users/' + email)
             .map((response => response.json()));
     }
 
-    md5(input){
+    warmUp() {
+        return this.http.options(environment.url + '/users').map((response => response.json()));
+    }
+
+    private md5(input) {
         return Md5.hashStr(input).toString();
-      }
+    }
 
 }

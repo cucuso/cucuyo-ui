@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PropertyService } from './shared/services/properties.service';
+import { UserService } from './shared/services/user.service';
 
 
 @Component({
@@ -8,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  public ngOnInit() {
+  constructor(private propertyService: PropertyService, private userService: UserService) { }
 
+  public ngOnInit() {
+    // ADD WARMPUP OPTIONS CALL
+    this.propertyService.warmUp().subscribe();
+    this.userService.warmUp().subscribe();
   }
 }

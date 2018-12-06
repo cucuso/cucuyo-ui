@@ -40,4 +40,8 @@ export class PropertyService {
             .map((response => response.json()));
     }
 
+    warmUp() {
+        return this.http.options(environment.url + '/properties').map((response => response.json()));
+    }
+
 }
