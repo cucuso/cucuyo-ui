@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    let newCourse= 
-
     this.service.createUser(Object.assign({}, this.user)).subscribe(r => {
 
       this.isUserCreated = true;
